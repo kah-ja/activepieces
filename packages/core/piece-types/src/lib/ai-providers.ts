@@ -1,4 +1,4 @@
-import { AIProviderName, isNil, unique } from '@activepieces/core-utils'
+import { AIProviderName, AZURE_RESOURCE_NAME_PATTERN, formErrors, isNil, unique } from '@activepieces/core-utils'
 import * as z from 'zod/mini'
 
 export enum AIProviderModelType {
@@ -68,7 +68,7 @@ export const CloudflareGatewayProviderConfig = z.object({
 export type CloudflareGatewayProviderConfig = z.infer<typeof CloudflareGatewayProviderConfig>
 
 export const AzureProviderConfig = z.object({
-    resourceName: z.string(),
+    resourceName: z.string().check(z.regex(AZURE_RESOURCE_NAME_PATTERN, formErrors.invalidAzureResourceName)),
     apiVersion: z.pipe(
         z.transform((v) => (typeof v === 'string' && v.trim().length === 0 ? undefined : v)),
         z.optional(z.string()),
