@@ -17,7 +17,7 @@ export const azureProvider: AIProviderStrategy<AzureProviderAuthConfig, AzurePro
 
         const resourceName = config.resourceName ?? ''
         if (!AZURE_RESOURCE_NAME_PATTERN.test(resourceName)) {
-            throw new Error('Azure resource name must be alphanumerics and hyphens only, up to 64 characters')
+            throw new Error('Azure resource name must be alphanumerics and hyphens only, up to 63 characters')
         }
 
         const endpoint = `https://${resourceName}.openai.azure.com`

@@ -54,7 +54,7 @@ describe('azureProvider.listModels', () => {
         ['empty', ''],
     ])('rejects a resource name that is not a single dns label (%s) without sending a request', async (_case, resourceName) => {
         await expect(azureProvider.listModels({ apiKey: 'test-key' }, { resourceName })).rejects.toThrow(
-            'Azure resource name must be alphanumerics and hyphens only, up to 64 characters',
+            'Azure resource name must be alphanumerics and hyphens only, up to 63 characters',
         )
         expect(mockSendRequest).not.toHaveBeenCalled()
     })
